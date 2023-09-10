@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+* {
+  padding: 0;
+  margin: 0;
+			}
+.main {
+  padding-top: 10px;
+  margin: 20px 0 0 20px;
+  width: 200px;
+  height: 250px;
+  border: 1px solid black;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  border: 1px solid red;
+  border-radius: 50%;
+  transform-origin: 50% 0;
+}
+.buttons {
+  width: 150px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+.plus, .minus {
+  width: 25px;
+}
+	</style>
+	</head>
+<body>
+	<main class='main'>
+	<section class="buttons">
+	<button class="plus">+</button>
+	<span class='count'>0</span>
+	<button class="minus">-</button>
+	</section>
+	<div class="circle"></div>
+	</main>
+
+	<script type="text/javascript">
+		const count = document.querySelector('.count');
+		const plus = document.querySelector('.plus');
+		const minus = document.querySelector('.minus');
+		const main = document.querySelector('.main');
+		const circle = document.querySelector('.circle');
+
+		main.addEventListener('click', functionCount);
+		let x = 1;
+		if (Number(count.innerHTML) === 0) {
+			minus.setAttribute('disabled', true);
+		}
+		function functionCount(e) {
+			// console.log(e.target.className);
+			if (e.target.className === 'plus' && count.innerHTML < 3) {
+				count.innerHTML = Number(count.innerHTML) + 1;
+				x = x + 0.5;
+				circle.style.transform = `scale(${x})`;
+				plus.removeAttribute('disabled', true);
+				minus.removeAttribute('disabled', true);
+				// circle.style.width = Number(circle.clientWidth) + 5 + 'px';
+				// circle.style.height = Number(circle.clientHeight) + 5 + 'px';
+			}
+			if (e.target.className === 'minus' && count.innerHTML > 0) {
+				count.innerHTML = Number(count.innerHTML) - 1;
+				x = x - 0.5;
+				circle.style.transform = `scale(${x})`;
+				plus.removeAttribute('disabled', true);
+				minus.removeAttribute('disabled', true);
+				// circle.style.width = Number(circle.clientWidth) - 5 + 'px';
+				// circle.style.height = Number(circle.clientHeight) - 5 + 'px';
+			}
+			if (Number(count.innerHTML) === 3) {
+				plus.setAttribute('disabled', true);
+			}
+			if (Number(count.innerHTML) === 0) {
+				minus.setAttribute('disabled', true);
+			}
+		}
+	</script>
+</body>
+</html>
